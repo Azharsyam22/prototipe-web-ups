@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://USERNAME.github.io/Prototipe-Web-UPS",
+  "homepage": "https://azharsyam22.github.io/prototipe-web-ups/",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
