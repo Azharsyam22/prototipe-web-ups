@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="112" fill="#13B0F9"/>
+  <circle cx="256" cy="224" r="108" fill="#ffffff" opacity="0.95"/>
+  <path d="M200 220c0-31 25-56 56-56s56 25 56 56v72c0 6-4 10-10 10h-92c-6 0-10-4-10-10v-72z" fill="#13B0F9"/>
+  <circle cx="256" cy="220" r="20" fill="#ffffff"/>
+  <rect x="196" y="318" width="120" height="40" rx="20" fill="#ffffff"/>
+  <text x="256" y="374" text-anchor="middle" font-size="44" font-family="Poppins, Inter, Arial, sans-serif" font-weight="700" fill="#ffffff">UPS</text>
+</svg>
