@@ -171,12 +171,43 @@ function App() {
   }, [otpCountdown, screen])
 
   const mapCenter = useMemo(() => userPosition ?? defaultCenter, [userPosition])
-  const scale = Math.min(
-    1,
-    Math.min((viewport.width - 24) / deviceWidth, (viewport.height - 24) / deviceHeight),
-  )
+  const isMobileViewport = viewport.width <= 480
+  const scale = isMobileViewport
+    ? Math.min(1, viewport.width / deviceWidth)
+    : Math.min(
+        1,
+        Math.min((viewport.width - 24) / deviceWidth, (viewport.height - 24) / deviceHeight),
+      )
   const scaledWidth = deviceWidth * scale
   const scaledHeight = deviceHeight * scale
+  const outerClass = isMobileViewport
+    ? 'w-full bg-white flex justify-start'
+    : 'w-full bg-[#f3f4f6] flex justify-center items-start'
+  const outerStyle = isMobileViewport
+    ? { minHeight: '100vh', padding: '0', margin: '0' }
+    : { minHeight: '100vh', paddingTop: '16px', paddingBottom: '16px' }
+  const frameClass = isMobileViewport
+    ? 'w-full'
+    : 'rounded-[30px] border border-[#d6d6d6] shadow-[0_24px_60px_rgba(0,0,0,0.2)]'
+  const innerClass = isMobileViewport
+    ? 'relative w-[390px] overflow-hidden bg-white'
+    : 'relative w-[390px] overflow-hidden rounded-[24px] bg-white'
+  const frameStyle = isMobileViewport
+    ? {
+        width: `${deviceWidth}px`,
+        height: `${deviceHeight}px`,
+        transform: `scale(${scale})`,
+        transformOrigin: 'top left',
+        border: 'none',
+        boxShadow: 'none',
+        borderRadius: '0px',
+      }
+    : {
+        width: `${deviceWidth}px`,
+        height: `${deviceHeight}px`,
+        transform: `scale(${scale})`,
+        transformOrigin: 'top left',
+      }
   const openModal = useCallback(
     (title: string, message: string, variant: 'error' | 'info' = 'error') => {
       setAppModal({ open: true, title, message, variant })
@@ -407,23 +438,12 @@ function App() {
   }, [favoritItems, favoritSearch])
 
   return (
-    <div
-      className="w-full bg-[#f3f4f6] flex justify-center items-start"
-      style={{ minHeight: '100vh', paddingTop: '16px', paddingBottom: '16px' }}
-    >
+    <div className={outerClass} style={outerStyle}>
       <div style={{ width: `${scaledWidth}px`, height: `${scaledHeight}px` }}>
-        <div
-          className="rounded-[30px] border border-[#d6d6d6] shadow-[0_24px_60px_rgba(0,0,0,0.2)]"
-          style={{
-            width: `${deviceWidth}px`,
-            height: `${deviceHeight}px`,
-            transform: `scale(${scale})`,
-            transformOrigin: 'top left',
-          }}
-        >
+        <div className={frameClass} style={frameStyle}>
           <div
-            className="relative w-[390px] overflow-hidden rounded-[24px] bg-white"
-            style={{ height: `${deviceHeight}px` }}
+            className={innerClass}
+            style={{ height: `${deviceHeight}px`, borderRadius: isMobileViewport ? 0 : undefined }}
           >
           <div
             ref={scrollRef}
